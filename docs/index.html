@@ -26,6 +26,36 @@
         .container {
             max-width: 1000px;
             margin: 0 auto;
+            padding: 2rem;<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saviynt, Okta, and CrowdStrike Integration</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --primary-color: #0071e3;
+            --secondary-color: #30b0c7;
+            --tertiary-color: #ff9500;
+            --background-color: #f5f5f7;
+            --text-color: #1d1d1f;
+            --card-background: #ffffff;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
             padding: 2rem;
         }
         
@@ -55,7 +85,7 @@
         
         .diagram {
             width: 100%;
-            max-width: 800px;
+            max-width: 900px;
             margin: 2rem auto;
             display: block;
         }
@@ -84,11 +114,23 @@
         a:hover {
             text-decoration: underline;
         }
+        
+        .step {
+            background-color: #f0f0f0;
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .step h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Saviynt x CrowdStrike Integration</h1>
+        <h1>Saviynt, Okta, and CrowdStrike Integration</h1>
         
         <div class="section">
             <h2>Project Overview</h2>
@@ -97,21 +139,71 @@
         
         <div class="section">
             <h2>Integration Architecture</h2>
-            <svg class="diagram" viewBox="0 0 800 300">
-                <rect x="50" y="50" width="200" height="80" rx="15" fill="#0071e3" />
-                <text x="150" y="95" text-anchor="middle" fill="white" font-size="24">Okta</text>
+            <svg class="diagram" viewBox="0 0 1000 600">
+                <style>
+                    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap');
+                    text { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica', sans-serif; }
+                    .title { font-weight: 600; }
+                    .small-text { font-size: 12px; }
+                </style>
                 
-                <rect x="300" y="50" width="200" height="80" rx="15" fill="#30b0c7" />
-                <text x="400" y="95" text-anchor="middle" fill="white" font-size="24">Saviynt EIC</text>
+                <!-- Background -->
+                <rect width="1000" height="600" fill="#f5f5f7"/>
                 
-                <rect x="550" y="50" width="200" height="80" rx="15" fill="#ff9500" />
-                <text x="650" y="95" text-anchor="middle" fill="white" font-size="24">CrowdStrike</text>
+                <!-- Saviynt -->
+                <rect x="50" y="50" width="900" height="150" rx="10" fill="#30b0c7"/>
+                <text x="500" y="110" text-anchor="middle" fill="white" font-size="24" class="title">Saviynt (IGA)</text>
+                <text x="500" y="140" text-anchor="middle" fill="white" font-size="14">Identity Governance and Administration</text>
+                <text x="500" y="160" text-anchor="middle" fill="white" font-size="14">Access Analytics, Risk-Based Access Reviews, SoD Controls</text>
                 
-                <path d="M250 90 L300 90" stroke="#1d1d1f" stroke-width="3" />
-                <path d="M500 90 L550 90" stroke="#1d1d1f" stroke-width="3" />
+                <!-- Okta -->
+                <rect x="50" y="250" width="400" height="120" rx="10" fill="#0071e3"/>
+                <text x="250" y="300" text-anchor="middle" fill="white" font-size="24" class="title">Okta</text>
+                <text x="250" y="330" text-anchor="middle" fill="white" font-size="14">SSO, MFA, Lifecycle Management</text>
                 
-                <path d="M150 130 Q400 220 650 130" stroke="#1d1d1f" stroke-width="3" fill="none" />
-                <text x="400" y="200" text-anchor="middle" fill="#1d1d1f" font-size="18">Single Sign-On (SSO)</text>
+                <!-- CrowdStrike -->
+                <rect x="550" y="250" width="400" height="120" rx="10" fill="#ff9500"/>
+                <text x="750" y="300" text-anchor="middle" fill="white" font-size="24" class="title">CrowdStrike</text>
+                <text x="750" y="330" text-anchor="middle" fill="white" font-size="14">Endpoint Security</text>
+                
+                <!-- Arrows -->
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#1d1d1f"/>
+                    </marker>
+                </defs>
+                
+                <!-- Saviynt to Okta -->
+                <path d="M250 200 L250 250" stroke="#1d1d1f" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <text x="270" y="265" fill="#1d1d1f" class="small-text">Policy Enforcement</text>
+                
+                <!-- Okta to Saviynt -->
+                <path d="M300 250 L300 200" stroke="#1d1d1f" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <text x="320" y="225" fill="#1d1d1f" class="small-text">User Activity</text>
+                
+                <!-- Okta to CrowdStrike -->
+                <path d="M450 310 L550 310" stroke="#1d1d1f" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <text x="500" y="300" fill="#1d1d1f" class="small-text">SCIM Provisioning</text>
+                
+                <!-- Saviynt to CrowdStrike -->
+                <path d="M750 200 L750 250" stroke="#1d1d1f" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <text x="770" y="225" fill="#1d1d1f" class="small-text">Access Governance</text>
+                
+                <!-- Legend -->
+                <rect x="50" y="450" width="900" height="100" fill="#ffffff" stroke="#1d1d1f" stroke-width="2" rx="10"/>
+                <text x="500" y="480" text-anchor="middle" fill="#1d1d1f" font-size="18" font-weight="600">Legend</text>
+                
+                <rect x="100" y="500" width="20" height="20" fill="#30b0c7"/>
+                <text x="130" y="515" fill="#1d1d1f" font-size="14">Saviynt (IGA)</text>
+                
+                <rect x="300" y="500" width="20" height="20" fill="#0071e3"/>
+                <text x="330" y="515" fill="#1d1d1f" font-size="14">Okta (IDaaS)</text>
+                
+                <rect x="500" y="500" width="20" height="20" fill="#ff9500"/>
+                <text x="530" y="515" fill="#1d1d1f" font-size="14">CrowdStrike</text>
+                
+                <line x1="700" y1="510" x2="750" y2="510" stroke="#1d1d1f" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <text x="790" y="515" fill="#1d1d1f" font-size="14">Data Flow</text>
             </svg>
         </div>
         
@@ -127,20 +219,88 @@ lastName        | lastName
 email           | email
 active          | status</code></pre>
             
-            <h3>User Provisioning: Saviynt EIC to CrowdStrike</h3>
-            <pre><code>Saviynt EIC Field | CrowdStrike Field
------------------- | ------------------
-userName           | uid
-firstName          | firstName
-lastName           | lastName
-email              | email
-status             | status</code></pre>
+            <h3>User Provisioning: Okta to CrowdStrike (via SCIM)</h3>
+            <pre><code>Okta Field      | CrowdStrike Field
+--------------- | ------------------
+userName        | uid
+firstName       | firstName
+lastName        | lastName
+email           | email
+active          | status</code></pre>
             
             <h3>Access Rights Provisioning: Saviynt EIC to CrowdStrike</h3>
             <pre><code>Saviynt EIC Field | CrowdStrike Field
 ------------------ | ------------------
 accountID          | user_uuid
 entitlementID      | roleIds</code></pre>
+        </div>
+        
+        <div class="section">
+            <h2>Deployment Guide</h2>
+            <p>Follow these steps to integrate Saviynt, Okta, and CrowdStrike to achieve the interconnected design shown in the diagram:</p>
+            
+            <div class="step">
+                <h4>Step 1: Set up Saviynt</h4>
+                <ol>
+                    <li>Configure identity sources in Saviynt</li>
+                    <li>Set up access policies and SoD rules</li>
+                    <li>Configure risk scoring and analytics settings</li>
+                </ol>
+            </div>
+            
+            <div class="step">
+                <h4>Step 2: Set up Okta</h4>
+                <ol>
+                    <li>Configure Okta Universal Directory</li>
+                    <li>Set up MFA policies</li>
+                    <li>Configure SSO for applications</li>
+                </ol>
+            </div>
+            
+            <div class="step">
+                <h4>Step 3: Integrate Saviynt with Okta</h4>
+                <ol>
+                    <li>Add Saviynt as an application in Okta</li>
+                    <li>Configure Okta in Saviynt's integration settings</li>
+                    <li>Set up policy synchronization and user activity logging</li>
+                </ol>
+            </div>
+            
+            <div class="step">
+                <h4>Step 4: Set up CrowdStrike</h4>
+                <ol>
+                    <li>Deploy CrowdStrike Falcon sensors to endpoints</li>
+                    <li>Configure CrowdStrike policies and detection settings</li>
+                </ol>
+            </div>
+            
+            <div class="step">
+                <h4>Step 5: Integrate Okta with CrowdStrike using SCIM</h4>
+                <ol>
+                    <li>Generate SCIM API token in CrowdStrike</li>
+                    <li>Add CrowdStrike as an application in Okta</li>
+                    <li>Configure SCIM provisioning in Okta for CrowdStrike</li>
+                </ol>
+            </div>
+            
+            <div class="step">
+                <h4>Step 6: Integrate Saviynt with CrowdStrike</h4>
+                <ol>
+                    <li>Configure CrowdStrike in Saviynt's integration settings</li>
+                    <li>Set up access governance policies for CrowdStrike in Saviynt</li>
+                    <li>Configure periodic access reviews for CrowdStrike users and roles</li>
+                </ol>
+            </div>
+            
+            <div class="step">
+                <h4>Step 7: Test and Verify the Integration</h4>
+                <ol>
+                    <li>Test user provisioning from Okta to CrowdStrike</li>
+                    <li>Verify access governance from Saviynt to CrowdStrike</li>
+                    <li>Test SSO login to CrowdStrike through Okta</li>
+                    <li>Verify policy enforcement from Saviynt to Okta</li>
+                </ol>
+            </div>
         </div>
         
         <div class="section">
@@ -167,10 +327,5 @@ entitlementID      | roleIds</code></pre>
             <h2>Resources</h2>
             <ul>
                 <li><a href="https://developer.saviynt.com/apis/">Saviynt EIC API Guide</a></li>
+                <li><a href="https://developer.okta.com/docs/reference/">Okta API Reference</a></li>
                 <li><a href="https://developer.crowdstrike.com/crowdstrike/docs">CrowdStrike API Reference</a></li>
-                <li><a href="https://developer.okta.com/docs/concepts/scim/">Okta SCIM Provisioning</a></li>
-            </ul>
-        </div>
-    </div>
-</body>
-</html>
