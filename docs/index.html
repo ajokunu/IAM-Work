@@ -1,63 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Saviynt x CrowdStrike Integration Docs</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="description" content="Documentation for Saviynt and CrowdStrike integration with Okta as IdP" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css" />
-  <style>
-    :root {
-      --theme-color: #0071e3;
-      --sidebar-nav-link-before-content: '';
-    }
-    .app-name-link img {
-      width: 150px;
-    }
-    .markdown-section {
-      max-width: 900px;
-    }
-    .sidebar-nav > ul > li > a {
-      font-weight: bold;
-    }
-    .content {
-      padding-top: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saviynt x CrowdStrike Integration Implementation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --primary-color: #0071e3;
+            --background-color: #f5f5f7;
+            --text-color: #1d1d1f;
+            --card-background: #ffffff;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        h1, h2, h3 {
+            font-weight: 600;
+        }
+        
+        .card {
+            background-color: var(--card-background);
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px) translateZ(10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #005ecb;
+            transform: translateY(-2px);
+        }
+        
+        .icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .diagram {
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+        }
+        
+        pre {
+            background-color: #f6f8fa;
+            border-radius: 10px;
+            padding: 1rem;
+            overflow-x: auto;
+        }
+        
+        code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
-  <div id="app"></div>
-  <script>
-    window.$docsify = {
-      name: 'Saviynt x CrowdStrike',
-      repo: 'https://github.com/yourusername/your-repo',
-      logo: '/images/logo.png',
-      loadSidebar: true,
-      subMaxLevel: 2,
-      auto2top: true,
-      search: {
-        maxAge: 86400000,
-        paths: 'auto',
-        placeholder: 'Type to search',
-        noData: 'No Results!',
-        depth: 6,
-        hideOtherSidebarContent: false,
-      },
-      pagination: {
-        previousText: 'Previous',
-        nextText: 'Next',
-        crossChapter: true,
-        crossChapterText: true,
-      },
-    }
-  </script>
-  <!-- Docsify v4 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-  <!-- Plugins -->
-  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+    <div class="container">
+        <h1>Saviynt x CrowdStrike Integration Implementation</h1>
+        
+        <div class="card">
+            <i class="icon fas fa-project-diagram"></i>
+            <h2>Project Overview & Features</h2>
+            <p>This document outlines the implementation details for integrating Saviynt Enterprise Identity Cloud (EIC) with CrowdStrike, using Okta as the Identity Provider (IdP). The integration aims to create a comprehensive identity and access management solution, combining Okta's identity management, Saviynt's governance capabilities, and CrowdStrike's cybersecurity platform.</p>
+        </div>
+        
+        <div class="card">
+            <i class="icon fas fa-cogs"></i>
+            <h2>Resources</h2>
+            <ul>
+                <li>Saviynt API Key (obtain from Saviynt admin portal)</li>
+                <li>CrowdStrike API Client ID and Secret (generate in CrowdStrike Falcon platform)</li>
+                <li>Okta API Token (generate in Okta admin console)</li>
+                <li>Saviynt EIC instance URL</li>
+                <li>CrowdStrike API endpoint</li>
+                <li>Okta org URL</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <i class="icon fas fa-sitemap"></i>
+            <h2>Integration Architecture Diagram</h2>
+            <div class="diagram">
+                <svg viewBox="0 0 800 400">
+                    <rect x="50" y="50" width="200" height="100" rx="20" fill="#0071e3" />
+                    <text x="150" y="110" text-anchor="middle" fill="white" font-size="24">Okta</text>
+                    
+                    <rect x="300" y="50" width="200" height="100" rx="20" fill="#30b0c7" />
+                    <text x="400" y="110" text-anchor="middle" fill="white" font-size="24">Saviynt EIC</text>
+                    
+                    <rect x="550" y="50" width="200" height="100" rx="20" fill="#ff9500" />
+                    <text x="650" y="110" text-anchor="middle" fill="white" font-size="24">CrowdStrike</text>
+                    
+                    <path d="M250 100 L300 100" stroke="#1d1d1f" stroke-width="3" />
+                    <path d="M500 100 L550 100" stroke="#1d1d1f" stroke-width="3" />
+                    
+                    <path d="M150 150 Q400 250 650 150" stroke="#1d1d1f" stroke-width="3" fill="none" />
+                    <text x="400" y="230" text-anchor="middle" fill="#1d1d1f" font-size="18">Single Sign-On (SSO)</text>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="card">
+            <i class="icon fas fa-exchange-alt"></i>
+            <h2>Supported Data Flows and Field Mapping</h2>
+            <h3>Flow 1: User Provisioning from Okta to Saviynt EIC</h3>
+            <pre><code>
+Okta Field      | Saviynt EIC Field
+--------------- | ------------------
+id              | externalId
+userName        | userName
+firstName       | firstName
+lastName        | lastName
+email           | email
+active          | status
+            </code></pre>
+            
+            <h3>Flow 2: User Provisioning from Saviynt EIC to CrowdStrike</h3>
+            <pre><code>
+Saviynt EIC Field | CrowdStrike Field
+------------------ | ------------------
+userName           | uid
+firstName          | firstName
+lastName           | lastName
+email              | email
+status             | status
+            </code></pre>
+            
+            <h3>Flow 3: Access Rights Provisioning from Saviynt EIC to CrowdStrike</h3>
+            <pre><code>
+Saviynt EIC Field | CrowdStrike Field
+------------------ | ------------------
+accountID          | user_uuid
+entitlementID      | roleIds
+            </code></pre>
+        </div>
+        
+        <div class="card">
+            <i class="icon fas fa-clipboard-check"></i>
+            <h2>Assumptions & Considerations</h2>
+            <ul>
+                <li>Implement API rate limiting in the integration code to respect CrowdStrike's limits.</li>
+                <li>Use UTC for all timestamp fields to ensure consistency.</li>
+                <li>Implement payload size checks before making API calls to CrowdStrike.</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <i class="icon fas fa-exclamation-triangle"></i>
+            <h2>Error Handling & Responses</h2>
+            <p>Implementation of error handling:</p>
+            <ol>
+                <li>Create a custom error logging module in Saviynt EIC.</li>
+                <li>Implement exponential backoff for retries.</li>
+                <li>Set up email notifications for critical errors.</li>
+            </ol>
+            <p>Example of exponential backoff implementation:</p>
+            <pre><code>
+import time
+
+def exponential_backoff(max_retries, base_delay=1):
+    for n in range(0, max_retries):
+        yield base_delay * (2 ** n)
+
+def retry_operation(operation, max_retries=3):
+    for delay in exponential_backoff(max_retries):
+        try:
+            return operation()
+        except Exception as e:
+            time.sleep(delay)
+    raise Exception("Max retries reached")
+            </code></pre>
+        </div>
+        
+        <div class="card">
+            <i class="icon fas fa-question-circle"></i>
+            <h2>FAQs</h2>
+            <p><strong>Q: How to troubleshoot synchronization issues?</strong></p>
+            <p>A: Check Saviynt EIC logs, verify API credentials, and ensure network connectivity between systems.</p>
+            
+            <p><strong>Q: How to add new fields to the integration?</strong></p>
+            <p>A: Update the field mappings in Saviynt EIC connector configuration and modify the corresponding API calls.</p>
+        </div>
+        
+        <div class="card">
+            <i class="icon fas fa-book"></i>
+            <h2>Relevant Documentation and Links</h2>
+            <ul>
+                <li><a href="https://developer.saviynt.com/apis/">Saviynt EIC API Guide</a></li>
+                <li><a href="https://developer.crowdstrike.com/crowdstrike/docs">CrowdStrike API Reference</a></li>
+                <li><a href="https://developer.okta.com/docs/concepts/scim/">Okta SCIM Provisioning</a></li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <i class="icon fas fa-rocket"></i>
+            <h2>Future Version Functionality</h2>
+            <ul>
+                <li>Implement webhook listeners for real-time updates between systems.</li>
+                <li>Develop a custom dashboard for integration health monitoring.</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <i class="icon fas fa-sticky-note"></i>
+            <h2>Other Notes</h2>
+            <ul>
+                <li>Conduct regular security audits of the integration code and processes.</li>
+                <li>Keep all API credentials securely stored and regularly rotated.</li>
+                <li>Document any custom scripts or configurations for future reference.</li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
