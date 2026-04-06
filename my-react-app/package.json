@@ -5,9 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
+    "build": "vite build",WWDW
+    "lint": "ess: "vite preview",
     "build:github": "vite build --base=/https://github.com/ajokunu/IAM-Work/"
   },
   "dependencies": {
